@@ -38,8 +38,22 @@ CREATE TABLE `notice`  (
 -- ----------------------------
 -- Records of notice
 -- ----------------------------
-INSERT INTO `notice` VALUES (1, '今天系统正式上线，开始内测', '今天系统正式上线，开始内测', '2023-09-05', 'admin');
-INSERT INTO `notice` VALUES (2, '所有功能都已完成，可以正常使用', '所有功能都已完成，可以正常使用', '2023-09-05', 'admin');
-INSERT INTO `notice` VALUES (3, '今天天气很不错，可以出去一起玩了', '今天天气很不错，可以出去一起玩了', '2023-09-05', 'admin');
+INSERT INTO `notice` VALUES (1, '今天系统正式上线，开始内测', '今天系统正式上线，开始内测', '2025-02-05', 'admin');
+INSERT INTO `notice` VALUES (2, '所有功能都已完成，可以正常使用', '所有功能都已完成，可以正常使用', '2025-02-05', 'admin');
+INSERT INTO `notice` VALUES (3, '今天天气很不错，可以出去一起玩了', '今天天气很不错，可以出去一起玩了', '2025-02-05', 'admin');
+
+-- ----------------------------
+-- Table structure for stay
+-- ----------------------------
+DROP TABLE IF EXISTS `stay`;
+CREATE TABLE `stay`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `student_id` int(10) NULL DEFAULT NULL COMMENT '学生ID',
+  `dormitory_id` int(10) NULL DEFAULT NULL COMMENT '寝室ID',
+  `building_id` int(10) NULL DEFAULT NULL COMMENT '宿舍楼ID',
+  `bed` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '床位号',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '住宿信息表' ROW_FORMAT = Dynamic;
+
 
 SET FOREIGN_KEY_CHECKS = 1;
