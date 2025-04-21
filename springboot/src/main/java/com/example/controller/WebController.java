@@ -19,6 +19,8 @@ public class WebController {
 
     @Resource
     private AdminService adminService;
+    @Resource
+    private StudentService StudentService;
 
     @GetMapping("/")
     public Result hello() {
@@ -36,6 +38,9 @@ public class WebController {
         }
         if (RoleEnum.ADMIN.name().equals(account.getRole())) {
             account = adminService.login(account);
+        }
+        if (RoleEnum.STUDENT.name().equals(account.getRole())) {
+            account = StudentService.login(account);
         }
         return Result.success(account);
     }
