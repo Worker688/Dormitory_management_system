@@ -30,6 +30,8 @@ public class JwtInterceptor implements HandlerInterceptor {
 
     @Resource
     private AdminService adminService;
+    @Resource
+    private StudentService studentService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
@@ -52,6 +54,9 @@ public class JwtInterceptor implements HandlerInterceptor {
             // 根据userId查询数据库
             if (RoleEnum.ADMIN.name().equals(role)) {
                 account = adminService.selectById(Integer.valueOf(userId));
+            }
+            if (RoleEnum.STUDENT.name().equals(role)) {
+                account = studentService.selectById(Integer.valueOf(userId));
             }
         } catch (Exception e) {
             throw new CustomException(ResultCodeEnum.TOKEN_CHECK_ERROR);
