@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 /**
  * 学生
-*/
-public class Admin extends Account implements Serializable {
+ */
+public class Student extends Account implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /** ID */
