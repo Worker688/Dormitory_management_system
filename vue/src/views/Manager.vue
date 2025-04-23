@@ -85,6 +85,9 @@ export default {
       if (this.user.role === 'ADMIN') {
         this.$router.push('/adminPerson')
       }
+       if (this.user.role === 'STUDENT') {
+              this.$router.push('/studentPerson')
+            }
     },
     logout() {
       localStorage.removeItem('xm-user')
