@@ -42,6 +42,20 @@ INSERT INTO `notice` VALUES (1, '今天系统正式上线，开始内测', '今�
 INSERT INTO `notice` VALUES (2, '所有功能都已完成，可以正常使用', '所有功能都已完成，可以正常使用', '2025-02-05', 'admin');
 INSERT INTO `notice` VALUES (3, '今天天气很不错，可以出去一起玩了', '今天天气很不错，可以出去一起玩了', '2025-02-05', 'admin');
 
+DROP TABLE IF EXISTS `student`;
+CREATE TABLE `student` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `avatar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '头像',
+  `username` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '密码',
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '姓名',
+  `role` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT 'STUDENT' COMMENT '角色',
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '电话',
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '邮箱',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学生信息表';
+
+
 -- ----------------------------
 -- Table structure for stay
 -- ----------------------------
