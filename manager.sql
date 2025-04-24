@@ -70,18 +70,15 @@ CREATE TABLE `stay`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '住宿信息表' ROW_FORMAT = Dynamic;
 
 
-DROP TABLE IF EXISTS `student`;
-CREATE TABLE `student` (
+DROP TABLE IF EXISTS `building`;
+CREATE TABLE `building` (
   `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
-  `avatar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '头像',
-  `username` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '密码',
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '姓名',
-  `role` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT 'STUDENT' COMMENT '角色',
-  `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '电话',
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '邮箱',
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '名称',
+  `location` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '位置',
+  `num` int(10) DEFAULT NULL COMMENT '宿舍数',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学生信息表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='宿舍楼信息表';
+
 
 
 SET FOREIGN_KEY_CHECKS = 1;

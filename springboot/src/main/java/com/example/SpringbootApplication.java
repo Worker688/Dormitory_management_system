@@ -10,18 +10,7 @@ public class SpringbootApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(SpringbootApplication.class, args);
-        System.out.println("\n");
-        System.out.println("|                                                                       |");
-        System.out.println("|  。\t\t\t|");
-        System.out.println("|  ，\t\t\t\t|");
-        System.out.println("|  \t|");
-        System.out.println("|  \t|");
-        System.out.println("|  \t\t\t\t|");
-        System.out.println("|  \t\t\t\t\t\t\t|");
-        System.out.println("|  \t\t\t\t|");
-        System.out.println("|  \t\t\t\t\t|");
-        System.out.println("");
-        System.out.println("");
+
     }
 
 }

@@ -24,6 +24,7 @@ const routes = [
       { path: 'password', name: 'Password', meta: { name: '修改密码' }, component: () => import('../views/manager/Password') },
       { path: 'notice', name: 'Notice', meta: { name: '公告信息' }, component: () => import('../views/manager/Notice') },
       { path: 'student', name: 'Student', meta: { name: '学生信息' }, component: () => import('../views/manager/Student') },
+      { path: 'student', name: 'Building', meta: { name: '宿舍楼信息' }, component: () => import('../views/manager/Building') },
     ]
   },
   {
@@ -46,8 +47,7 @@ const router = new VueRouter({
   routes
 })
 
- 注：不需要前台的项目，可以注释掉该路由守卫
- 路由守卫
+
  router.beforeEach((to ,from, next) => {
    let user = JSON.parse(localStorage.getItem("xm-user") || '{}');
    if (to.path === '/') {
