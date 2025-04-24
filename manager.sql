@@ -56,6 +56,15 @@ CREATE TABLE `student` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='学生信息表';
 
 
+DROP TABLE IF EXISTS `dormitory`;
+CREATE TABLE `dormitory` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '寝室号',
+  `building_id` int(10) DEFAULT NULL COMMENT '宿舍楼ID',
+  `num` int(10) DEFAULT NULL COMMENT '容纳数',
+  `now_num` int(10) DEFAULT '0' COMMENT '已住人数',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='宿舍信息表';
 -- ----------------------------
 -- Table structure for stay
 -- ----------------------------
