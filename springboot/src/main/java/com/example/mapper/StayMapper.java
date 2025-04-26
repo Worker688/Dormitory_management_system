@@ -37,4 +37,7 @@ public interface StayMapper {
 
     @Select("select * from stay where student_id = #{studentId}")
     Stay selectByStudentId(Integer studentId);
+
+    @Select("select * from stay where dormitory_id = #{dormitoryId} and bed = #{bed}")
+    Stay selectByDormitoryIdAndBed(@Param("dormitoryId") Integer dormitoryId, @Param("bed") String bed);
 }
