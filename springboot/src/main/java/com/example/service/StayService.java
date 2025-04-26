@@ -63,7 +63,14 @@ public class StayService {
      * 删除
      */
     public void deleteById(Integer id) {
+        Stay stay = stayMapper.selectById(id);
         stayMapper.deleteById(id);
+        //更新对应宿舍的住宿人数
+        Dormitory dormitory = dormitoryMapper.selectById(stay.getDormitoryId());
+        if (ObjectUtil.isNotEmpty(dormitory)) {
+            dormitory.setNowNum(dormitory.getNowNum() - 1);
+            dormitoryMapper.updateById(dormitory);
+        }
     }
 
     /**

@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.common.Result;
 import com.example.entity.Stay;
+import com.example.exception.CustomException;
 import com.example.service.StayService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,11 @@ public class StayController {
      */
     @PostMapping("/add")
     public Result add(@RequestBody Stay stay) {
+        if (ObjectUtil.isEmpty(stay.getStudentId()
+                || ObjectUtil.isEmpty(stay.getDormitoryId()
+                || ObjectUtil.isEmpty(stay.getBed())) {
+            throw new CustomException("-1","请完善信息");
+        }
         stayService.add(stay);
         return Result.success();
     }
