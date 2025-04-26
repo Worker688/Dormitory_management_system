@@ -35,4 +35,6 @@ public interface StayMapper {
     */
     List<Stay> selectAll(Stay notice);
 
+    @Select("select * from stay where student_id = #{studentId}")
+    Stay selectByStudentId(Integer studentId);
 }

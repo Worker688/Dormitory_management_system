@@ -3,10 +3,13 @@ package com.example.service;
 import cn.hutool.core.date.DateUtil;
 import com.example.entity.Account;
 import com.example.entity.Stay;
+import com.example.exception.CustomException;
+import com.example.mapper.DormitoryMapper;
 import com.example.mapper.StayMapper;
 import com.example.utils.TokenUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import javafx.beans.binding.Bindings;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -20,11 +23,26 @@ public class StayService {
 
     @Resource
     private StayMapper stayMapper;
+    @Resource
+    private DormitoryMapper  dormitoryMapper;
 
     /**
      * 新增
      */
     public void add(Stay stay) {
+        //查询当前学生有没有住宿信息
+        Stay dbStay = stayMapper.selectByStudentId(stay.getStudentId());
+        if (ObjectUtil.isNotEmpty(dbStay)){
+            throw new CustomException("-1","该学生已有住宿信息,请勿重复添加");
+        }
+        if (ObjectUtil.isNotEmpty(stay.getDormitoryId())){
+            //根据寝室ID查询出寝室信息
+            Dormitory dormitory = dormitoryMapper.selectById(stay.getDormitoryId());
+            if (ObjectUtil.isNotEmpty(dormitory)){
+                //初始化宿舍楼ID字段
+                stay.setBuildingId(dormitory.getBuildingId());
+            }
+        }
         stayMapper.insert(stay);
     }
 
