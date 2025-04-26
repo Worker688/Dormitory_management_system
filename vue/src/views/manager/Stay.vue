@@ -1,7 +1,8 @@
 <template>
   <div>
     <div class="search">
-      <el-input placeholder="请输入标题查询" style="width: 200px" v-model="title"></el-input>
+      <el-input placeholder="请输入学生姓名" style="width: 200px" v-model="studentName"></el-input>
+      <el-input placeholder="请输入寝室名称" style="width: 200px; margin-left: 5px" v-model="dormitoryName"></el-input>
       <el-button type="info" plain style="margin-left: 10px" @click="load(1)">查询</el-button>
       <el-button type="warning" plain style="margin-left: 10px" @click="reset">重置</el-button>
     </div>
@@ -87,7 +88,8 @@ export default {
       pageNum: 1,   // 当前的页码
       pageSize: 10,  // 每页显示的个数
       total: 0,
-      title: null,
+      studentName: null,
+      dormitoryName: null,
       fromVisible: false,
       form: {},
       user: JSON.parse(localStorage.getItem('xm-user') || '{}'),
@@ -195,7 +197,8 @@ export default {
         params: {
           pageNum: this.pageNum,
           pageSize: this.pageSize,
-          title: this.title,
+          studentName: this.studentName,
+          dormitoryName: this.dormitoryName,
         }
       }).then(res => {
         this.tableData = res.data?.list
@@ -203,7 +206,8 @@ export default {
       })
     },
     reset() {
-      this.title = null
+      this.studentName = null
+      this.dormitoryName = null
       this.load(1)
     },
     handleCurrentChange(pageNum) {
