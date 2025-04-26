@@ -9,7 +9,7 @@
     </sql>
 
     <select id="selectAll" resultType="com.example.entity.Stay">
-        select stay.*, student.name as studentName, dormitory.name as dormitoryName, building.name as buildingName
+        select stay.*, student.name as studentName, dormitory.code as dormitoryName, building.name as buildingName
         from stay
         left join student on stay.student_id = student.id
         left join dormitory on stay.dormitory_id = dormitory.id
@@ -17,7 +17,7 @@
         <where>
             <if test="id != null"> and id= #{id}</if>
             <if test="studentName != null"> and student.name= #{studentName}</if>
-            <if test="dormitoryName != null"> and dormitory.name= #{dormitoryName}</if>
+            <if test="dormitoryName != null"> and dormitory.code= #{dormitoryName}</if>
         </where>
         order by id desc
     </select>
