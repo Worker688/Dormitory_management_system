@@ -39,8 +39,16 @@ public class StayService {
             //根据寝室ID查询出寝室信息
             Dormitory dormitory = dormitoryMapper.selectById(stay.getDormitoryId());
             if (ObjectUtil.isNotEmpty(dormitory)){
+                //先去校验一下该宿舍有没有住满
+                if (dormitory.getNum().equals(dormitory.getNowNum())){
+                    throw new CustomException("-1","该宿舍已经住满，请分配到其他宿舍");
+                }
                 //初始化宿舍楼ID字段
                 stay.setBuildingId(dormitory.getBuildingId());
+                //同步宿舍表里对应的已住人数
+                dormitory.setNowNum(dormitory.getNowNum() + 1);
+                dormitoryMapper.updateById(dormitory);
+
             }
         }
         stayMapper.insert(stay);
