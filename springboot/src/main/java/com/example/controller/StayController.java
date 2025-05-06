@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.example.common.Result;
 import com.example.entity.Stay;
 import com.example.exception.CustomException;
@@ -11,7 +12,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * 公告信息表前端操作接口
+ * 住宿信息表前端操作接口
  **/
 @RestController
 @RequestMapping("/stay")
@@ -25,12 +26,24 @@ public class StayController {
      */
     @PostMapping("/add")
     public Result add(@RequestBody Stay stay) {
-        if (ObjectUtil.isEmpty(stay.getStudentId()
-                || ObjectUtil.isEmpty(stay.getDormitoryId()
+        if (ObjectUtil.isEmpty(stay.getStudentId())
+                || ObjectUtil.isEmpty(stay.getDormitoryId())
                 || ObjectUtil.isEmpty(stay.getBed())) {
-            throw new CustomException("-1","请完善信息");
+            throw new CustomException("-1", "请完善信息");
         }
         stayService.add(stay);
+        return Result.success();
+    }
+
+    /**
+     * 更换宿舍/床位
+     */
+    @PostMapping("/exchange")
+    public Result exchange(@RequestBody Stay stay) {
+        if (ObjectUtil.isEmpty(stay.getExStudentId())) {
+            throw new CustomException("-1", "请选择学生");
+        }
+        stayService.exchange(stay);
         return Result.success();
     }
 

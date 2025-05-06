@@ -1,13 +1,13 @@
 <template>
   <div>
-    <div class="search">
+    <div class="search" v-if="user.role === 'ADMIN'">
       <el-input placeholder="请输入学生姓名" style="width: 200px" v-model="studentName"></el-input>
-      <el-input placeholder="请输入寝室名称" style="width: 200px; margin-left: 5px" v-model="dormitoryName"></el-input>
+      <el-input placeholder="请输入寝室号" style="width: 200px; margin-left: 5px" v-model="dormitoryName"></el-input>
       <el-button type="info" plain style="margin-left: 10px" @click="load(1)">查询</el-button>
       <el-button type="warning" plain style="margin-left: 10px" @click="reset">重置</el-button>
     </div>
 
-    <div class="operation">
+    <div class="operation" v-if="user.role === 'ADMIN'">
       <el-button type="primary" plain @click="handleAdd">新增</el-button>
       <el-button type="danger" plain @click="delBatch">批量删除</el-button>
     </div>
@@ -21,9 +21,9 @@
         <el-table-column prop="buildingName" label="宿舍楼"></el-table-column>
         <el-table-column prop="bed" label="床位号"></el-table-column>
 
-        <el-table-column label="操作" width="180" align="center">
+        <el-table-column label="操作" width="220" align="center" v-if="user.role === 'ADMIN'">
           <template v-slot="scope">
-            <el-button plain type="primary" @click="handleEdit(scope.row)" size="mini">编辑</el-button>
+            <el-button plain type="primary" @click="handleEdit(scope.row)" size="mini">更换宿舍/床位</el-button>
             <el-button plain type="danger" size="mini" @click=del(scope.row.id)>删除</el-button>
           </template>
         </el-table-column>
@@ -31,13 +31,13 @@
 
       <div class="pagination">
         <el-pagination
-            background
-            @current-change="handleCurrentChange"
-            :current-page="pageNum"
-            :page-sizes="[5, 10, 20]"
-            :page-size="pageSize"
-            layout="total, prev, pager, next"
-            :total="total">
+                background
+                @current-change="handleCurrentChange"
+                :current-page="pageNum"
+                :page-sizes="[5, 10, 20]"
+                :page-size="pageSize"
+                layout="total, prev, pager, next"
+                :total="total">
         </el-pagination>
       </div>
     </div>
@@ -47,27 +47,17 @@
       <el-form label-width="100px" style="padding-right: 50px" :model="form" :rules="rules" ref="formRef">
         <el-form-item prop="studentId" label="选择学生">
           <el-select v-model="form.studentId" placeholder="请选择" style="width: 100%">
-            <el-option
-              v-for="item in studentData"
-              :key="item.id"
-              :label="item.name"
-              :value="item.id">
-            </el-option>
+            <el-option v-for="item in studentData" :key="item.id" :label="item.name" :value="item.id"></el-option>
           </el-select>
-         </el-form-item>
+        </el-form-item>
         <el-form-item prop="dormitoryId" label="选择寝室">
           <el-select v-model="form.dormitoryId" placeholder="请选择" style="width: 100%">
-            <el-option
-              v-for="item in dormitoryData"
-              :key="item.id"
-              :label="item.code"
-              :value="item.id">
-             </el-option>
+            <el-option v-for="item in dormitoryData" :key="item.id" :label="item.code" :value="item.id"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item prop="bed" label="床位编号">
-          <el-input v-model="form.title" autocomplete="off"></el-input>
-            </el-form-item>
+          <el-input v-model="form.bed" autocomplete="off"></el-input>
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="fromVisible = false">取 消</el-button>
@@ -75,7 +65,19 @@
       </div>
     </el-dialog>
 
-
+    <el-dialog title="更换宿舍/床位" :visible.sync="exchangeVisible" width="40%" :close-on-click-modal="false" destroy-on-close>
+      <el-form label-width="100px" style="padding-right: 50px">
+        <el-form-item prop="studentId" label="选择学生">
+          <el-select v-model="studentId" placeholder="请选择" style="width: 100%">
+            <el-option v-for="item in studentData" :key="item.id" :label="item.name" :value="item.id"></el-option>
+          </el-select>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="exchangeVisible = false">取 消</el-button>
+        <el-button type="primary" @click="exchange">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -91,6 +93,7 @@ export default {
       studentName: null,
       dormitoryName: null,
       fromVisible: false,
+      exchangeVisible: false,
       form: {},
       user: JSON.parse(localStorage.getItem('xm-user') || '{}'),
       rules: {
@@ -103,41 +106,53 @@ export default {
       },
       ids: [],
       studentData: [],
-      dormitoryData: []
+      dormitoryData: [],
+      studentId: null
     }
   },
   created() {
     this.load(1)
     this.loadStudent()
     this.loadDormitory()
-
   },
   methods: {
-  loadStudent(){
-    this.$request.get('/student/selectAll').then(res => {
-       if (res.code === '200'){
-         this.studentData = res.data
-       } else {
-         this.$message.error(res.meg)
-       }
-    })
-  },
-  loadDormitory(){
-    this.$request.get('/dormitory/selectAll').then(res => {
-       if (res.code === '200'){
-         this.dormitoryData = res.data
-       } else {
-         this.$message.error(res.meg)
-       }
-    })
-  },
+    loadStudent() {
+      this.$request.get('/student/selectAll').then(res => {
+        if (res.code === '200') {
+          this.studentData = res.data
+        } else {
+          this.$message.error(res.msg)
+        }
+      })
+    },
+    loadDormitory() {
+      this.$request.get('/dormitory/selectAll').then(res => {
+        if (res.code === '200') {
+          this.dormitoryData = res.data
+        } else {
+          this.$message.error(res.msg)
+        }
+      })
+    },
     handleAdd() {   // 新增数据
       this.form = {}  // 新增数据的时候清空数据
       this.fromVisible = true   // 打开弹窗
     },
     handleEdit(row) {   // 编辑数据
-      this.form = JSON.parse(JSON.stringify(row))  // 给form对象赋值  注意要深拷贝数据
-      this.fromVisible = true   // 打开弹窗
+      this.form = JSON.parse(JSON.stringify(row))
+      this.exchangeVisible = true
+    },
+    exchange() {
+      this.form.exStudentId = this.studentId
+      this.$request.post('/stay/exchange', this.form).then(res => {
+        if (res.code === '200') {
+          this.$message.success('操作成功')
+          this.exchangeVisible = false
+          this.load(1)
+        } else {
+          this.$message.error(res.msg)
+        }
+      })
     },
     save() {   // 保存按钮触发的逻辑  它会触发新增或者更新
       this.$refs.formRef.validate((valid) => {

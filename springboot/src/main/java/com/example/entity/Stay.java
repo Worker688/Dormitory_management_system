@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * 住宿信息表
-*/
+ */
 public class Stay implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -13,10 +13,13 @@ public class Stay implements Serializable {
     private Integer dormitoryId;
     private Integer buildingId;
     private String bed;
-    //
+
     private String studentName;
     private String dormitoryName;
     private String buildingName;
+
+    private Integer exStudentId;
+
     public Integer getId() {
         return id;
     }
@@ -56,7 +59,7 @@ public class Stay implements Serializable {
     public void setBed(String bed) {
         this.bed = bed;
     }
-    //
+
     public String getStudentName() {
         return studentName;
     }
@@ -79,5 +82,13 @@ public class Stay implements Serializable {
 
     public void setBuildingName(String buildingName) {
         this.buildingName = buildingName;
+    }
+
+    public Integer getExStudentId() {
+        return exStudentId;
+    }
+
+    public void setExStudentId(Integer exStudentId) {
+        this.exStudentId = exStudentId;
     }
 }
