@@ -47,6 +47,7 @@
             <el-menu-item index="/dormitory">宿舍信息</el-menu-item>
             <el-menu-item index="/stay">住宿信息</el-menu-item>
             <el-menu-item index="/exchange">换寝记录</el-menu-item>
+            <el-menu-item index="/fix">寝室报修</el-menu-item>
           </el-submenu>
 
           <el-submenu index="user">
