@@ -31,13 +31,13 @@
 
       <div class="pagination">
         <el-pagination
-                background
-                @current-change="handleCurrentChange"
-                :current-page="pageNum"
-                :page-sizes="[5, 10, 20]"
-                :page-size="pageSize"
-                layout="total, prev, pager, next"
-                :total="total">
+            background
+            @current-change="handleCurrentChange"
+            :current-page="pageNum"
+            :page-sizes="[5, 10, 20]"
+            :page-size="pageSize"
+            layout="total, prev, pager, next"
+            :total="total">
         </el-pagination>
       </div>
     </div>
