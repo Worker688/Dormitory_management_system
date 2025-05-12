@@ -4,23 +4,28 @@ import java.io.Serializable;
 
 /**
  * 寝室报修表
-*/
+ */
 public class Fix implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer id;
-
     private Integer studentId;
-
     private Integer dormitoryId;
-
     private String content;
-
     private String img;
-
     private String time;
-
     private String status;
+
+    private String studentName;
+    private String dormitoryName;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getStudentId() {
         return studentId;
@@ -68,5 +73,21 @@ public class Fix implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+
+    public String getDormitoryName() {
+        return dormitoryName;
+    }
+
+    public void setDormitoryName(String dormitoryName) {
+        this.dormitoryName = dormitoryName;
     }
 }
