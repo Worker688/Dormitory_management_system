@@ -26,6 +26,50 @@
           </template>
         </el-table-column>
       </el-table>
+
+            <div class="pagination">
+              <el-pagination
+                  background
+                  @current-change="handleCurrentChange"
+                  :current-page="pageNum"
+                  :page-sizes="[5, 10, 20]"
+                  :page-size="pageSize"
+                  layout="total, prev, pager, next"
+                  :total="total">
+              </el-pagination>
+            </div>
+          </div>
+
+
+          <el-dialog title="信息" :visible.sync="fromVisible" width="40%" :close-on-click-modal="false" destroy-on-close>
+            <el-form label-width="100px" style="padding-right: 50px" :model="form" :rules="rules" ref="formRef">
+              <el-form-item prop="dormitoryId" label="来访宿舍">
+                <el-select v-model="form.dormitoryId" placeholder="请选择" style="width: 100%">
+                  <el-option v-for="item in dormitoryData" :key="item.id" :label="item.code" :value="item.id"></el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item prop="content" label="来访说明">
+                <el-input type="textarea" :rows="5" v-model="form.content" autocomplete="off"></el-input>
+              </el-form-item>
+              <el-form-item prop="time" label="来访时间">
+                <el-date-picker style="width: 100%"
+                    v-model="form.time"
+                    type="datetime"
+                    value-format="yyyy-MM-dd HH:mm:ss"
+                    placeholder="选择日期时间">
+                </el-date-picker>
+              </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+              <el-button @click="fromVisible = false">取 消</el-button>
+              <el-button type="primary" @click="save">确 定</el-button>
+            </div>
+          </el-dialog>
+
+
+        </div>
+      </template>
+
 //到这
     <div class="table">
       <el-table :data="tableData" stripe  @selection-change="handleSelectionChange">
