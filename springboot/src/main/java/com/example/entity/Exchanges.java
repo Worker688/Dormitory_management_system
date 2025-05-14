@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * 换寝记录信息表
-*/
+ */
 public class Exchanges implements Serializable {
     private static final long serialVersionUID = 1L;
 

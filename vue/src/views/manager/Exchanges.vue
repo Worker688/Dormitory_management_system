@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="operation">
+    <div class="operation" v-if="user.role === 'ADMIN'">
       <el-button type="danger" plain @click="delBatch">批量删除</el-button>
     </div>
 
@@ -9,14 +9,14 @@
         <el-table-column type="selection" width="55" align="center"></el-table-column>
         <el-table-column prop="id" label="序号" width="80" align="center" sortable></el-table-column>
         <el-table-column prop="studenta" label="学生A" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="dormitorya" label="学生A原寝室" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="dormitorya" label="学生A原宿舍" show-overflow-tooltip></el-table-column>
         <el-table-column prop="beda" label="学生A原床位"></el-table-column>
         <el-table-column prop="studentb" label="学生B"></el-table-column>
-        <el-table-column prop="dormitoryb" label="学生B原寝室" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="dormitoryb" label="学生B原宿舍" show-overflow-tooltip></el-table-column>
         <el-table-column prop="bedb" label="学生B原床位"></el-table-column>
         <el-table-column prop="time" label="操作时间"></el-table-column>
 
-        <el-table-column label="操作" width="180" align="center">
+        <el-table-column label="操作" width="180" align="center" v-if="user.role === 'ADMIN'">
           <template v-slot="scope">
             <el-button plain type="danger" size="mini" @click=del(scope.row.id)>删除</el-button>
           </template>
@@ -25,13 +25,13 @@
 
       <div class="pagination">
         <el-pagination
-                background
-                @current-change="handleCurrentChange"
-                :current-page="pageNum"
-                :page-sizes="[5, 10, 20]"
-                :page-size="pageSize"
-                layout="total, prev, pager, next"
-                :total="total">
+            background
+            @current-change="handleCurrentChange"
+            :current-page="pageNum"
+            :page-sizes="[5, 10, 20]"
+            :page-size="pageSize"
+            layout="total, prev, pager, next"
+            :total="total">
         </el-pagination>
       </div>
     </div>

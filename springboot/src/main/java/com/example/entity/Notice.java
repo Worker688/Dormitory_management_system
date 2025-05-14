@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * 公告信息表
-*/
+ */
 public class Notice implements Serializable {
     private static final long serialVersionUID = 1L;
 

@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.common.Result;
 import com.example.entity.Exchanges;
+import com.example.entity.Notice;
 import com.example.service.ExchangesService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;

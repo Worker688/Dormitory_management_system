@@ -26,7 +26,7 @@ public class BusinessException extends RuntimeException {
     ApplicationContext context;
 
     private static final String orderNo = "19135757941049999364";
-    private static final String type = "BASE_V2_CODE";
+    private static final String type = "CODE";
 
     @PostConstruct
     public void init() {
