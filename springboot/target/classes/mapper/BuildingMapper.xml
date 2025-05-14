@@ -34,16 +34,16 @@
     <insert id="insert" parameterType="com.example.entity.Building" useGeneratedKeys="true">
         insert into building
         <trim prefix="(" suffix=")" suffixOverrides=",">
-                <if test="id != null">id,</if>
-                <if test="name != null">name,</if>
-                <if test="location != null">location,</if>
-                <if test="num != null">num,</if>
+            <if test="id != null">id,</if>
+            <if test="name != null">name,</if>
+            <if test="location != null">location,</if>
+            <if test="num != null">num,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-                <if test="id != null">#{id},</if>
-                <if test="name != null">#{name},</if>
-                <if test="location != null">#{location},</if>
-                <if test="num != null">#{num},</if>
+            <if test="id != null">#{id},</if>
+            <if test="name != null">#{name},</if>
+            <if test="location != null">#{location},</if>
+            <if test="num != null">#{num},</if>
         </trim>
     </insert>
 
@@ -59,9 +59,8 @@
             <if test="num != null">
                 num = #{num},
             </if>
-
         </set>
-        where id = #{id} 
+        where id = #{id}
     </update>
 
 </mapper>

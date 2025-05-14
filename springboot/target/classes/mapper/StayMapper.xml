@@ -16,8 +16,9 @@
         left join building on stay.building_id = building.id
         <where>
             <if test="id != null"> and id= #{id}</if>
-            <if test="studentName != null"> and student.name= #{studentName}</if>
-            <if test="dormitoryName != null"> and dormitory.code= #{dormitoryName}</if>
+            <if test="studentId != null"> and stay.student_id = #{studentId}</if>
+            <if test="studentName != null"> and student.name = #{studentName}</if>
+            <if test="dormitoryName != null"> and dormitory.code = #{dormitoryName}</if>
         </where>
         order by id desc
     </select>
@@ -42,7 +43,6 @@
             <if test="dormitoryId != null">dormitory_id,</if>
             <if test="buildingId != null">building_id,</if>
             <if test="bed != null">bed,</if>
-
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -69,7 +69,7 @@
                 bed = #{bed},
             </if>
         </set>
-        where id = #{id} 
+        where id = #{id}
     </update>
 
 </mapper>

@@ -1,4 +1,3 @@
-
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
@@ -105,8 +104,8 @@ CREATE TABLE `exchanges`  (
 -- ----------------------------
 -- Records of exchanges
 -- ----------------------------
-INSERT INTO `exchanges` VALUES (7, '李四', '李七', 'A102', 'A101', '1号', '2号', '2024-04-18 15:21:46');
-INSERT INTO `exchanges` VALUES (8, '张三', '王五', 'A101', 'A101', '1号', '3号', '2024-04-18 15:22:51');
+INSERT INTO `exchanges` VALUES (7, '萧炎', '石昊', 'A102', 'A101', '1号', '2号', '2024-04-18 15:21:46');
+INSERT INTO `exchanges` VALUES (8, '张三分', '王战国', 'A101', 'A101', '1号', '3号', '2024-04-18 15:22:51');
 
 -- ----------------------------
 -- Table structure for fix
@@ -126,8 +125,8 @@ CREATE TABLE `fix`  (
 -- ----------------------------
 -- Records of fix
 -- ----------------------------
-INSERT INTO `fix` VALUES (1, 1, 3, '宿舍的灯坏了，麻烦维修师傅来修一下！', 'http://localhost:9090/files/1713427037539-柴犬.jpeg', '2024-04-18 15:58:41', '已处理');
-INSERT INTO `fix` VALUES (3, 2, 4, '111111', 'http://localhost:9090/files/1713429181439-柯基.jpeg', '2024-04-18 16:33:02', '已处理');
+INSERT INTO `fix` VALUES (1, 1, 3, '宿舍的灯坏了，请师傅来修一下！', 'http://localhost:9090/files/img_1.png', '2026-04-18 15:58:41', '已处理');
+INSERT INTO `fix` VALUES (3, 2, 4, '空调坏了', 'http://localhost:9090/files/img.png', '2026-04-18 16:33:02', '已处理');
 
 -- ----------------------------
 -- Table structure for notice
@@ -147,7 +146,7 @@ CREATE TABLE `notice`  (
 -- ----------------------------
 INSERT INTO `notice` VALUES (1, '今天系统正式上线，开始内测', '今天系统正式上线，开始内测', '2026-04-05', 'admin');
 INSERT INTO `notice` VALUES (2, '今天下雨，注意收取晾晒衣服', '今天下雨，注意收取晾晒衣服', '2026-09-05', 'admin');
-INSERT INTO `notice` VALUES (3, '今天天气很不错，可以出去一起玩了', '今天天气很不错，可以出去一起玩了', '2026-09-05', 'admin');
+INSERT INTO `notice` VALUES (3, '今天天气很不错，tiantiankaixin', '今天天气很不错，天天开心', '2026-09-05', 'admin');
 
 -- ----------------------------
 -- Table structure for stay
@@ -190,11 +189,11 @@ CREATE TABLE `student`  (
 -- ----------------------------
 -- Records of student
 -- ----------------------------
-INSERT INTO `student` VALUES (1, 'http://localhost:9090/files/1712824656163-柴犬.jpeg', 'zhangsan', '123456', '张三', 'STUDENT', '18800009999', 'zhangsan@xm.com');
-INSERT INTO `student` VALUES (2, 'http://localhost:9090/files/1712824687292-柯基.jpeg', 'lisi', '123456', '李四', 'STUDENT', '188800001111', 'lisi@xm.com');
-INSERT INTO `student` VALUES (3, 'http://localhost:9090/files/1712824705517-拉布拉多.jpeg', 'wangwu', '123456', '王五', 'STUDENT', '18877776666', 'wangwu@xm.com');
-INSERT INTO `student` VALUES (4, 'http://localhost:9090/files/1712907290631-金毛.jpeg', 'zhaoliu', '123456', '赵六', 'STUDENT', '18877776666', 'zhaoliu@xm.com');
-INSERT INTO `student` VALUES (5, 'http://localhost:9090/files/1713341457218-柯基.jpeg', 'liqi', '123456', '李七', 'STUDENT', '18877776666', 'liqi@xm.com');
+INSERT INTO `student` VALUES (1, 'http://localhost:9090/files/1712824656163-柴犬.jpeg', 'zhangsan', '123456', '张三分', 'STUDENT', '18800009999', 'zhangsan@xm.com');
+INSERT INTO `student` VALUES (2, 'http://localhost:9090/files/1712824687292-柯基.jpeg', 'lisi', '123456', '李坦克', 'STUDENT', '188800001111', 'lisi@xm.com');
+INSERT INTO `student` VALUES (3, 'http://localhost:9090/files/1747226740700-R-C.jpg', 'wangwu', '123456', '王战国', 'STUDENT', '18877776666', 'wangwu@xm.com');
+INSERT INTO `student` VALUES (4, 'http://localhost:9090/files/1747226669hhh.png', 'xiaoyan', '123456', '萧炎', 'STUDENT', '18877776666', 'zhaoliu@xm.com');
+INSERT INTO `student` VALUES (5, 'http://localhost:9090/files/1747227.jpg', 'shihao', '123456', '石昊', 'STUDENT', '18877776666', 'liqi@xm.com');
 
 -- ----------------------------
 -- Table structure for visit
@@ -211,7 +210,7 @@ CREATE TABLE `visit`  (
 -- ----------------------------
 -- Records of visit
 -- ----------------------------
-INSERT INTO `visit` VALUES (1, 3, '检查宿舍', '2024-04-18 16:56:04');
-INSERT INTO `visit` VALUES (1, 3, '探亲', '2025-08-18 16:52:04');
+INSERT INTO `visit` (`dormitory_id`, `content`, `time`) VALUES (3, '检查宿舍', '2026-04-18 16:56:04');
+INSERT INTO `visit` (`dormitory_id`, `content`, `time`) VALUES (3, '探亲', '2026-08-18 16:52:04');
 
 SET FOREIGN_KEY_CHECKS = 1;
