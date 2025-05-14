@@ -37,18 +37,18 @@
     <insert id="insert" parameterType="com.example.entity.Notice" useGeneratedKeys="true">
         insert into notice
         <trim prefix="(" suffix=")" suffixOverrides=",">
-                <if test="id != null">id,</if>
-                <if test="title != null">title,</if>
-                <if test="content != null">content,</if>
-                <if test="time != null">time,</if>
-                <if test="user != null">user,</if>
+            <if test="id != null">id,</if>
+            <if test="title != null">title,</if>
+            <if test="content != null">content,</if>
+            <if test="time != null">time,</if>
+            <if test="user != null">user,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-                <if test="id != null">#{id},</if>
-                <if test="title != null">#{title},</if>
-                <if test="content != null">#{content},</if>
-                <if test="time != null">#{time},</if>
-                <if test="user != null">#{user},</if>
+            <if test="id != null">#{id},</if>
+            <if test="title != null">#{title},</if>
+            <if test="content != null">#{content},</if>
+            <if test="time != null">#{time},</if>
+            <if test="user != null">#{user},</if>
         </trim>
     </insert>
 
@@ -68,7 +68,7 @@
                 user = #{user},
             </if>
         </set>
-        where id = #{id} 
+        where id = #{id}
     </update>
 
 </mapper>

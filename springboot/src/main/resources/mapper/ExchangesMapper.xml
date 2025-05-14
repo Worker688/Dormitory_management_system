@@ -14,6 +14,7 @@
         from exchanges
         <where>
             <if test="id != null"> and id= #{id}</if>
+            <if test="studenta != null"> and (studenta = #{studenta} or studentb = #{studenta})</if>
         </where>
         order by id desc
     </select>
@@ -30,30 +31,28 @@
         where  id = #{id}
     </delete>
 
-    <insert id="insert" parameterType="com.example.entity.exchanges" useGeneratedKeys="true">
+    <insert id="insert" parameterType="com.example.entity.Exchanges" useGeneratedKeys="true">
         insert into exchanges
         <trim prefix="(" suffix=")" suffixOverrides=",">
-                <if test="id != null">id,</if>
-                <if test="studenta != null">studenta,</if>
-                <if test="studentb != null">studentb,</if>
-                <if test="dormitorya != null">dormitorya,</if>
-                <if test="dormitoryb != null">dormitoryb,</if>
-                <if test="beda != null">beda,</if>
-                <if test="bedb != null">bedb,</if>
-                <if test="time != null">time,</if>
+            <if test="id != null">id,</if>
+            <if test="studenta != null">studenta,</if>
+            <if test="studentb != null">studentb,</if>
+            <if test="dormitorya != null">dormitorya,</if>
+            <if test="dormitoryb != null">dormitoryb,</if>
+            <if test="beda != null">beda,</if>
+            <if test="bedb != null">bedb,</if>
+            <if test="time != null">time,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-                <if test="id != null">#{id},</if>
-                <if test="studenta != null">#{studenta},</if>
-                <if test="studentb != null">#{studentb},</if>
-                <if test="dormitorya != null">#{dormitorya},</if>
-                <if test="dormitoryb != null">#{dormitoryb},</if>
-                <if test="beda != null">#{beda},</if>
-                <if test="bedb != null">#{bedb},</if>
-                <if test="time != null">#{time},</if>
+            <if test="id != null">#{id},</if>
+            <if test="studenta != null">#{studenta},</if>
+            <if test="studentb != null">#{studentb},</if>
+            <if test="dormitorya != null">#{dormitorya},</if>
+            <if test="dormitoryb != null">#{dormitoryb},</if>
+            <if test="beda != null">#{beda},</if>
+            <if test="bedb != null">#{bedb},</if>
+            <if test="time != null">#{time},</if>
         </trim>
     </insert>
-
-
 
 </mapper>
