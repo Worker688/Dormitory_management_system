@@ -5,11 +5,12 @@ import com.example.entity.Student;
 import com.example.service.StudentService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
+
 import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * 管理员前端操作接口
+ * 学生前端操作接口
  **/
 @RestController
 @RequestMapping("/student")
