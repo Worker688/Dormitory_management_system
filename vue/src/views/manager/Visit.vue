@@ -70,85 +70,48 @@
         </div>
       </template>
 
-//到这
-    <div class="table">
-      <el-table :data="tableData" stripe  @selection-change="handleSelectionChange">
-        <el-table-column type="selection" width="55" align="center"></el-table-column>
-        <el-table-column prop="id" label="序号" width="80" align="center" sortable></el-table-column>
-        <el-table-column prop="title" label="标题" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="content" label="内容" show-overflow-tooltip></el-table-column>
-        <el-table-column prop="time" label="创建时间"></el-table-column>
-        <el-table-column prop="user" label="创建人"></el-table-column>
-
-        <el-table-column label="操作" width="180" align="center">
-          <template v-slot="scope">
-            <el-button plain type="primary" @click="handleEdit(scope.row)" size="mini">编辑</el-button>
-            <el-button plain type="danger" size="mini" @click=del(scope.row.id)>删除</el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-
-      <div class="pagination">
-        <el-pagination
-            background
-            @current-change="handleCurrentChange"
-            :current-page="pageNum"
-            :page-sizes="[5, 10, 20]"
-            :page-size="pageSize"
-            layout="total, prev, pager, next"
-            :total="total">
-        </el-pagination>
-      </div>
-    </div>
-
-
-    <el-dialog title="信息" :visible.sync="fromVisible" width="40%" :close-on-click-modal="false" destroy-on-close>
-      <el-form label-width="100px" style="padding-right: 50px" :model="form" :rules="rules" ref="formRef">
-        <el-form-item prop="title" label="标题">
-          <el-input v-model="form.title" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item prop="content" label="内容">
-          <el-input type="textarea" :rows="5" v-model="form.content" autocomplete="off"></el-input>
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="fromVisible = false">取 消</el-button>
-        <el-button type="primary" @click="save">确 定</el-button>
-      </div>
-    </el-dialog>
-
-
-  </div>
-</template>
-
 <script>
 export default {
-  name: "Notice",
+  name: "Visit",
   data() {
     return {
       tableData: [],  // 所有的数据
       pageNum: 1,   // 当前的页码
       pageSize: 10,  // 每页显示的个数
       total: 0,
-      title: null,
+      content: null,
       fromVisible: false,
       form: {},
       user: JSON.parse(localStorage.getItem('xm-user') || '{}'),
       rules: {
-        title: [
-          {required: true, message: '请输入标题', trigger: 'blur'},
+        dormitoryId: [
+          {required: true, message: '请选择宿舍', trigger: 'blur'},
         ],
         content: [
-          {required: true, message: '请输入内容', trigger: 'blur'},
+          {required: true, message: '请输入说明', trigger: 'blur'},
+        ],
+        time: [
+          {required: true, message: '请选择时间', trigger: 'blur'},
         ]
       },
-      ids: []
+      ids: [],
+      dormitoryData: []
     }
   },
   created() {
     this.load(1)
+    this.loadDormitory()
   },
   methods: {
+    loadDormitory() {
+      this.$request.get('/dormitory/selectAll').then(res => {
+        if (res.code === '200') {
+          this.dormitoryData = res.data
+        } else {
+          this.$message.error(res.msg)
+        }
+      })
+    },
     handleAdd() {   // 新增数据
       this.form = {}  // 新增数据的时候清空数据
       this.fromVisible = true   // 打开弹窗
@@ -161,7 +124,7 @@ export default {
       this.$refs.formRef.validate((valid) => {
         if (valid) {
           this.$request({
-            url: this.form.id ? '/notice/update' : '/notice/add',
+            url: this.form.id ? '/visit/update' : '/visit/add',
             method: this.form.id ? 'PUT' : 'POST',
             data: this.form
           }).then(res => {
@@ -178,7 +141,7 @@ export default {
     },
     del(id) {   // 单个删除
       this.$confirm('您确定删除吗？', '确认删除', {type: "warning"}).then(response => {
-        this.$request.delete('/notice/delete/' + id).then(res => {
+        this.$request.delete('/visit/delete/' + id).then(res => {
           if (res.code === '200') {   // 表示操作成功
             this.$message.success('操作成功')
             this.load(1)
@@ -198,7 +161,7 @@ export default {
         return
       }
       this.$confirm('您确定批量删除这些数据吗？', '确认删除', {type: "warning"}).then(response => {
-        this.$request.delete('/notice/delete/batch', {data: this.ids}).then(res => {
+        this.$request.delete('/visit/delete/batch', {data: this.ids}).then(res => {
           if (res.code === '200') {   // 表示操作成功
             this.$message.success('操作成功')
             this.load(1)
@@ -211,11 +174,11 @@ export default {
     },
     load(pageNum) {  // 分页查询
       if (pageNum) this.pageNum = pageNum
-      this.$request.get('/notice/selectPage', {
+      this.$request.get('/visit/selectPage', {
         params: {
           pageNum: this.pageNum,
           pageSize: this.pageSize,
-          title: this.title,
+          content: this.content,
         }
       }).then(res => {
         this.tableData = res.data?.list
@@ -223,7 +186,7 @@ export default {
       })
     },
     reset() {
-      this.title = null
+      this.content = null
       this.load(1)
     },
     handleCurrentChange(pageNum) {
