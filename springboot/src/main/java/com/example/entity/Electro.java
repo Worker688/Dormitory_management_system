@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * 电费缴纳表
-*/
+ */
 public class Electro implements Serializable {
     private static final long serialVersionUID = 1L;
 

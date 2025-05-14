@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * 宿舍楼信息表
-*/
+ */
 public class Building implements Serializable {
     private static final long serialVersionUID = 1L;
 
